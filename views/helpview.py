@@ -1,4 +1,3 @@
-from typing import Optional
 import discord
 from discord import SelectOption
 from discord.ext import commands
@@ -308,6 +307,11 @@ class HelpSelect(Select):
             FU_embed.add_field(
                 name="``/wiki``",
                 value="Search something in wikipedia",
+                inline=False
+            )
+            FU_embed.add_field(
+                name="``/report``",
+                value="Report a user in the server",
                 inline=False
             )
             await interaction.response.send_message(embed=FU_embed, ephemeral=True)
