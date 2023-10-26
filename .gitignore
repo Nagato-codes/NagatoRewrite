@@ -171,7 +171,3 @@ cython_debug/
 
 # Built Visual Studio Code Extensions
 *.vsix
-
-utils/
-Database/
-commands/lovecalc.py
