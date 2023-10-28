@@ -11,7 +11,7 @@ class LoveCalc(commands.Cog):
 
     @app_commands.command(name="lovecalc", description="Calculate yours and a persons love")
     async def lovecalc(self, interaction: discord.Interaction, member1:discord.Member, member2: discord.Member):
-        if member1.id == 923161381266685953 and member2.id == 995121392083292190:
+        if member1.id == 923161381266685953 and member2.id == 995121392083292190 or member2.id == 923161381266685953 and member1.id == 995121392083292190: 
             love_percent = "100%"
             embed = discord.Embed(
                 title=" ",

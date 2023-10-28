@@ -11,7 +11,7 @@ class Report(commands.Cog):
 
     @app_commands.command(name="report", description="Report a user")
     async def report(self, interaction:discord.Interaction):
-        await interaction.response.send_modal(ReportModal
+        await interaction.response.send_modal(ReportModal())
 
 async def setup(bot:commands.Bot):
     await bot.add_cog(Report(bot), guilds=[discord.Object(id=SERVERID)])

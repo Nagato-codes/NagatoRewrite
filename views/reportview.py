@@ -1,4 +1,3 @@
-from discord.ext import commands
 from discord.ui import Modal, TextInput
 from discord import Interaction, TextStyle, Embed, Color
 from discord.utils import get
