@@ -3,7 +3,6 @@ from discord.ext import commands
 import os
 from utils.config import TOKEN
 
-bot = discord.Client(intents=discord.Intents.all())
 bot = commands.Bot(command_prefix="?", help_command=None, intents=discord.Intents.all(), application_id='1139850594501279745')
 
 async def load_cogs():

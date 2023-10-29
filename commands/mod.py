@@ -7,6 +7,7 @@ from discord.ext import commands
 from time import time
 from discord import app_commands
 from utils.config import SERVERID
+from views.banapp import BanAppealView
 
 async def get_wid():
     db = await aiosqlite.connect("Database/warns.db")
@@ -182,12 +183,13 @@ class Moderation(commands.Cog):
             log_embed.add_field(name="UserName", value=member.name, inline=True)
             log_embed.set_footer(icon_url=interaction.user.avatar, text=f"Banned By • {interaction.user.mention}")
             await log_channel.send(embed=log_embed)
+            view = BanAppealView(self.bot)
             try:
                 Membed = discord.Embed(
                     title=f"YOU HAVE BEEN BANNED FROM {interaction.guild.name}",
                     description=f"Reason: {reason}"
                 )
-                await member.send(embed=Membed)
+                await member.send(embed=Membed, view=view)
             except discord.Forbidden:
                 pass
         except Exception as e:
