@@ -44,7 +44,6 @@ class VerifyView(View):
         button: discord.Button
     ):
         role = discord.utils.get(interaction.guild.roles, name="Verified")
-        memrole = discord.utils.get(interaction.guild.roles, name="Members")
         if role in interaction.user.roles:
                 await interaction.response.send_message("You are already verified", ephemeral=True)
 
@@ -65,7 +64,6 @@ class VerifyView(View):
             if response.content == verification_codes.get(interaction.user.id):
                 if role:
                     await interaction.user.add_roles(role)
-                    await interaction.user.add_roles(memrole)
                     await interaction.user.send(f"You are now verified in {interaction.guild}")
                 else:
                     await interaction.response.send_message("Sorry, this command is only for Nagato's main server.", ephemeral=True)

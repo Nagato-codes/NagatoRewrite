@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from discordify import Spotify
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 class Spotifyy(commands.Cog):
     def __init__(self, bot:commands.Bot) -> None:

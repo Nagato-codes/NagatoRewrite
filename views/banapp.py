@@ -21,7 +21,7 @@ class BanAppealView(View):
         await interaction.response.send_message(
             embed=discord.Embed(
                 title="",
-                description=f"[Click this link to ban appeal]({link})",
+                description=f"Click this [link] to ban appeal({link})",
                 color=discord.Color.random()
             )
         )

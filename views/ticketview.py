@@ -4,7 +4,7 @@ import time
 import chat_exporter
 from github import Github
 from discord.ext import commands
-from utils.config import GTOKEN
+from utils.nagato import GTOKEN
 from discord.ui import button, View
 
 async def get_transcript(member: discord.Member, channel: discord.TextChannel):

@@ -1,14 +1,16 @@
 import discord
 from discord.ext import commands
+from utils.nagato import MESSLOGS
 
 class MessageLogs(commands.Cog):
     def __init__(self, bot:commands.Bot) -> None:
         super().__init__()
         self.bot = bot
+        self.log_channel = self.bot.get_channel(MESSLOGS)
 
     @commands.Cog.listener()
     async def on_message_delete(self, message: discord.Message):
-        logs_channel = self.bot.get_channel(1123603829708046436)
+        logs_channel = self.log_channel
 
         if logs_channel:
             embed = discord.Embed(
@@ -27,7 +29,7 @@ class MessageLogs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_edit(self, before: discord.Message, after: discord.Message):
-            logs_channel = self.bot.get_channel(1123603829708046436)
+            logs_channel = self.log_channel
 
             if logs_channel:
                 if before.content != after.content:
@@ -57,7 +59,7 @@ class MessageLogs(commands.Cog):
         with open("assets/misc/deletedtext.txt", "w", encoding="utf-8") as file:
             file.write(deleted_content)
 
-        logs_channel = self.bot.get_channel(1123603829708046436)
+        logs_channel = self.log_channel
         
         with open("assets/misc/deletedtext.txt", "rb") as file:
             file_contents = discord.File(file, filename="deletedtext.txt")

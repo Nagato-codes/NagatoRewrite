@@ -2,7 +2,7 @@ import discord
 import wikipedia
 from discord.ext import commands
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 class Wikipedia(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:

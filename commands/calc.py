@@ -2,7 +2,7 @@ import discord
 import math
 from discord.ext import commands
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 class MathCommands(commands.Cog):
     def __init__(self, bot:commands.Bot) -> None:

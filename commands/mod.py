@@ -6,7 +6,7 @@ from random import choice
 from discord.ext import commands
 from time import time
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 from views.banapp import BanAppealView
 
 async def get_wid():

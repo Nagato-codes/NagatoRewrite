@@ -3,14 +3,13 @@ import aiosqlite
 from datetime import datetime
 from discord.ext import commands
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 async def update_staff_list_embed(guild):
     # Fetch the staff roles from your guild (server)
     staff_roles = [
         "Nagato", 
         "Official Projects", 
-        "Konan", 
         "Deva Path",
         "Animal Path",
         "Asura Path", 

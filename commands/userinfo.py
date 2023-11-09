@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 from discord import app_commands
 
 class UserInfo(commands.Cog):
@@ -31,8 +31,7 @@ class UserInfo(commands.Cog):
         
         embed = discord.Embed(
             title=f"User Info - {user}",
-            color=user.color,
-            timestamp=interaction.message.created_at
+            color=user.color
         )
         embed.set_thumbnail(url=user.avatar)
         embed.set_footer(text=f"Requested by {interaction.user}", icon_url=interaction.user.avatar)

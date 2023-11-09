@@ -4,7 +4,7 @@ from discord import File
 from discord.ext import commands
 from discord import app_commands
 from easy_pil import Editor, load_image_async, Font
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 #if you want to give role to the user at any specific level upgrade then you can do like this
 #enter the name of the role in a list

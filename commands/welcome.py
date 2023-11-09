@@ -10,6 +10,9 @@ class Welcome(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member:discord.Member):
+        memrole = discord.utils.get(member.guild.roles, name="Members")
+        await member.add_roles(memrole)
+        
         channel = discord.utils.get(member.guild.channels, name="👋・welcome")
 
         background = Editor("assets/imgs/welcomebg.jpg")

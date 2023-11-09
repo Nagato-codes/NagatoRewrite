@@ -1,7 +1,7 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 from views.reportview import ReportModal
 
 class Report(commands.Cog):

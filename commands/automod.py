@@ -3,7 +3,7 @@ import time
 import aiosqlite
 from discord.ext import commands
 from random import choice
-from utils.config import SERVERID
+from utils.nagato import SERVERID
 
 async def get_wid() -> str:
     db = await aiosqlite.connect("Database/warns.db")

@@ -2,7 +2,7 @@ import discord
 import sqlite3
 from discord.ext import commands
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 class CustomCommands(commands.Cog):
     def __init__(self, bot:commands.Bot):

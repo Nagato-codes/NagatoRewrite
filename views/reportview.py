@@ -14,6 +14,6 @@ class ReportModal(Modal, title="Report User"):
 
         await channel.send(embed=Embed(
             title="USER REPORTED!",
-            description=f"### Report Submitted by {interaction.user.mention} \n ### Name: {self.user_name} \n ### ID: {self.user_id} \n ### Reported for: {self.description}",
+            description=f"## Report Submitted by {interaction.user.mention} \n ## Name: {self.user_name} \n ## ID: {self.user_id} \n ## Reported for: {self.description}",
             color=Color.random()
         ))

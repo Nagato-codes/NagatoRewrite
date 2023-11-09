@@ -13,9 +13,9 @@
 <!-- Table of Contents -->
 ## Table of Contents
 - [Features](#features)
-- [Setting Up](#setting-up)
 - [Helpers](#helpers)
-- [License](MIT-LICENSE)
+- [Prerequisites](#prerequisites)
+- [License](LICENSE)
 - [Contact](#contact)
 
 <!-- Features -->
@@ -29,19 +29,13 @@
 - Python 3.8 or higher
 - Discord Bot Token
 
-### Setting Up
-- Go To [Link](https://nagato.vercel.app)
-- Invite the bot from there
-- do `?help` 
-- setup the bot
-- YOUR READY!!
-
 ### Helpers
 - Nagato (Owner / Creator / Coder)
-- Cope (Server Manager / Designer / Assistant Coder)
+- Cope (Server Manager / Designer / Assistant Coder) 😔 may you live a happy life
 - ShamelessPlayer (Designer/ Assistant Coder)
 
 ### Contact
 - [Server Link](https://discord.gg/sGnASjneTh)
 - [Email](nagato.develop@gmail.com)
-- [Discord Username](@uzumaki._.nagato)
+- [Discord Username](https://discord.com/users/uzumaki._.nagato)
+- [Instagram](https://instagram.com/ibirahim.m0siin)

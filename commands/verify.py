@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from views.verifyview import VerifyView
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 from discord import app_commands
 
 class Verify(commands.Cog):

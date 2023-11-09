@@ -3,7 +3,7 @@ import requests
 import random
 from discord.ext import commands
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 class Meme(commands.Cog):
     def __init__(self, bot:commands.Bot) -> None:

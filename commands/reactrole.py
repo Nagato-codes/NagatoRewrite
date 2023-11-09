@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 from views.roleview import PingRolesView, GenderRolesView
 
 class ReactRoles(commands.Cog):

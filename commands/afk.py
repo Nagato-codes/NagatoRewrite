@@ -3,7 +3,7 @@ import random
 import aiosqlite
 import time
 from discord import app_commands
-from utils.config import SERVERID
+from utils.nagato import SERVERID
 from discord.ext import commands
 
 class AFK(commands.Cog):

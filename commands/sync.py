@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from utils.config import SERVERID
+from utils.nagato  import SERVERID
 
 class Sync(commands.Cog):
     def __init__(self, bot:commands.Bot) -> None:
