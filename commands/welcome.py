@@ -4,7 +4,7 @@ from discord import File
 from easy_pil import Editor, load_image_async, Font
 
 class Welcome(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot)  :
         super().__init__()
         self.bot = bot
 
@@ -13,7 +13,7 @@ class Welcome(commands.Cog):
         memrole = discord.utils.get(member.guild.roles, name="Members")
         await member.add_roles(memrole)
         
-        channel = discord.utils.get(member.guild.channels, name="👋・welcome")
+        channel = self.bot.get_channel(1117161505624957101)
 
         background = Editor("assets/imgs/welcomebg.jpg")
         profile_image = await load_image_async(str(member.avatar))

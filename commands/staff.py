@@ -57,7 +57,7 @@ async def update_staff_list_embed(guild):
         await channel.send(embed=embed)
 
 class Staff(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot)  :
         super().__init__()
         self.bot = bot
 

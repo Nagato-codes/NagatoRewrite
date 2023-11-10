@@ -5,7 +5,7 @@ from utils.nagato  import SERVERID
 from views.ticketview import TicketOpenView
 
 class Ticket(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot):
         super().__init__()
         self.bot = bot
 

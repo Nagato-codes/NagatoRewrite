@@ -5,7 +5,7 @@ from discordify import Spotify
 from utils.nagato  import SERVERID
 
 class Spotifyy(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot)  :
         super().__init__()
         self.bot = bot
 

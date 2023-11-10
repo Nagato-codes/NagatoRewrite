@@ -5,7 +5,7 @@ from utils.nagato  import SERVERID
 from views.roleview import PingRolesView, GenderRolesView
 
 class ReactRoles(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot)  :
         super().__init__()
         self.bot = bot
 

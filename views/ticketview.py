@@ -5,7 +5,7 @@ import chat_exporter
 from github import Github
 from discord.ext import commands
 from utils.nagato import GTOKEN
-from discord.ui import button, View
+from discord.ui import View, Button, button
 
 async def get_transcript(member: discord.Member, channel: discord.TextChannel):
     export = await chat_exporter.export(channel=channel)
@@ -19,28 +19,23 @@ def upload(file_path: str, member_name: str):
     file_name = f"{int(time.time())}"
     repo.create_file(
         path=f"tickets/{file_name}.html",
-        message="Ticket Log for {0}".format(member_name),
+        message=f"Ticket Log for {member_name}",
         branch="main",
-        content=open(f"{file_path}", "r", encoding="utf-8").read()
+        content=open(file_path, "r", encoding="utf-8").read()
     )
-
     return file_name
 
 class TicketOpenView(View):
     def __init__(self, bot: commands.Bot):
         super().__init__(timeout=None)
         self.bot = bot
-    
+
     @button(
         label="Open Ticket",
         emoji="🎫",
         style=discord.ButtonStyle.blurple,
     )
-    async def open_ticket_view(
-        self,
-        interaction: discord.Interaction,
-        button: discord.Button
-    ):
+    async def open_ticket_view(self, interaction, button):
         await interaction.response.send_message(
             embed=discord.Embed(
                 description=":white_check_mark: Opening a Ticket!",
@@ -49,18 +44,21 @@ class TicketOpenView(View):
             ephemeral=True
         )
 
-        catagory = discord.utils.get(interaction.guild.categories, name="Tickets")
+        category = discord.utils.get(interaction.guild.categories, name="Tickets")
         staff_role = discord.utils.get(interaction.guild.roles, name="6 Paths Of Pain")
+        muted_role = discord.utils.get(interaction.guild.roles, name="Muted")
+
         # Create a new text channel with specific permissions
         overwrites = {
             interaction.guild.default_role: discord.PermissionOverwrite(read_messages=False),
             staff_role: discord.PermissionOverwrite(read_messages=True, send_messages=True, manage_messages=True),
             interaction.user: discord.PermissionOverwrite(read_messages=True, send_messages=True),
+            muted_role: discord.PermissionOverwrite(read_messages=True, send_messages=True),
             interaction.guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True, manage_messages=True)
         }
 
         channel_name = f"{interaction.user.name}'s Ticket"
-        channel = await interaction.guild.create_text_channel(name=channel_name, overwrites=overwrites, category=catagory, topic=f"{interaction.user.id} DO NOT CHANGE THE TOPIC OF THIS CHANNEL")
+        channel = await interaction.guild.create_text_channel(name=channel_name, overwrites=overwrites, category=category, topic=f"{interaction.user.id} DO NOT CHANGE THE TOPIC OF THIS CHANNEL")
 
         await interaction.edit_original_response(
             embed=discord.Embed(
@@ -85,7 +83,7 @@ class TicketOpenView(View):
         )
 
 class TicketCloseView(View):
-    def __init__(self, bot: commands.Bot,):
+    def __init__(self, bot: commands.Bot):
         super().__init__(timeout=None)
         self.bot = bot
 
@@ -94,11 +92,7 @@ class TicketCloseView(View):
         emoji="🔒",
         style=discord.ButtonStyle.red
     )
-    async def close_ticket_view(
-        self,
-        interaction: discord.Interaction,
-        button: discord.Button
-    ):
+    async def close_ticket_view(self, interaction, button):
         await interaction.response.send_message(
             embed=discord.Embed(
                 title="Closing Ticket",
@@ -109,7 +103,7 @@ class TicketCloseView(View):
 
         await asyncio.sleep(3)
 
-        deleteView = TicketDeleteView(self.bot)
+        delete_view = TicketDeleteView(self.bot)
         category = discord.utils.get(interaction.guild.categories, name="Closed Tickets")
 
         # Set channel permissions to allow reading and disallow sending
@@ -126,54 +120,46 @@ class TicketCloseView(View):
                 description="This ticket has been closed!",
                 color=discord.Color.random()
             ),
-            view=deleteView
+            view=delete_view
         )
 
         log_channel = discord.utils.get(interaction.guild.channels, name="🔰・ticket-logs")
 
-        view = TranscriptView(self.bot, interaction.channel)
         member_id = int(interaction.channel.topic.split()[0])
         member = interaction.guild.get_member(member_id)
+        await get_transcript(member=member, channel=interaction.channel)
+        file_name = upload(f"{member.id}.html", member.name)
+        link = f"https://nagato-codes.github.io/Website/tickets/{file_name}"
 
-        await log_channel.send(
-            embed=discord.Embed(
-                title="TICKET LOG",
-                description=f"Opened by {member.mention}\nClosed by {interaction.user.mention}",
-            ), 
-            view=view
-        )
-
-        await interaction.user.send(
-            embed=discord.Embed(
+        embed = (
+            discord.Embed(
                 title="Ticket Closed",
-                description=f"Your ticket in {interaction.guild} has been closed",
-                color=discord.Color.random()
+                color=discord.Color.og_blurple(),
+            )
+            .add_field(name="Opened by:", value=member.mention, inline=False)
+            .add_field(name="Closed by:", value=interaction.user.mention, inline=False)
+            .add_field(
+                name="Closing Time:", inline=False, value=f"<t:{int(time.time())}:f>"
             )
         )
 
-class TranscriptView(View):
-    def __init__(self, bot:commands.Bot, channel:discord.TextChannel):
-        super().__init__()
-        self. bot = bot
-        self.channel = channel
+        view = View(timeout=None)
+        view.add_item(TranscriptView(channel=interaction.channel, url=link))
+        log_message = await log_channel.send(embed=embed, view=view)
+        embed.add_field(name="Logs:", inline=False, value=log_message.jump_url)
+        try:
+            await member.send(embed=embed, view=view)
+        except discord.Forbidden:
+            pass
 
-    @button(
-        label="Transcript",
-        emoji="⛓",
-        style=discord.ButtonStyle.blurple
-    )
-    async def transcript_view(
-        self, 
-        interaction:discord.Interaction,
-        button: discord.Button
-    ):
-        member_id = int(self.channel.topic.split()[0])
-        member = interaction.guild.get_member(member_id)
-        await get_transcript(member=member, channel=self.channel)
-        file_name = upload(f"{member.id}.html", member.name)
-        link = f" https://nagato-codes.github.io/Website/{file_name}"
-
-        button.url = link
+class TranscriptView(Button):
+    def __init__(self, channel: discord.TextChannel, url: str):
+        super().__init__(
+            label="Transcript",
+            emoji="🔗",
+            url=url,
+            style=discord.ButtonStyle.url
+        )
 
 class TicketDeleteView(View):
     def __init__(self, bot: commands.Bot):
@@ -185,11 +171,7 @@ class TicketDeleteView(View):
         emoji="🗑️",
         style=discord.ButtonStyle.red
     )
-    async def delete_ticket_view(
-        self,
-        interaction: discord.Interaction,
-        button: discord.Button
-    ):
+    async def delete_ticket_view(self, interaction, button):
         await interaction.response.send_message(
             embed=discord.Embed(
                 title="Deleting Ticket",

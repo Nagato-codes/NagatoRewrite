@@ -14,7 +14,7 @@ level = ["Rookie (5)", "Baller (15)", "Expert (20)", "Master (50)", "Mythical (1
 level_num = [5, 15, 20, 50, 100]
 
 class Levelsys(commands.Cog):
-  def __init__(self, bot:commands.Bot) -> None:
+  def __init__(self, bot:commands.Bot)  :
     super().__init__()
     self.bot = bot
 

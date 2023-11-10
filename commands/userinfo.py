@@ -4,7 +4,7 @@ from utils.nagato  import SERVERID
 from discord import app_commands
 
 class UserInfo(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot)  :
         super().__init__()
         self.bot = bot
 

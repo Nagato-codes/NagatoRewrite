@@ -50,7 +50,7 @@ time_dict = {
 }
     
 class Moderation(commands.Cog):
-    def __init__(self, bot:commands.Bot) -> None:
+    def __init__(self, bot:commands.Bot)  :
         super().__init__()
         self.bot = bot
 
