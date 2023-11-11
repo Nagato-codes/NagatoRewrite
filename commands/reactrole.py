@@ -12,7 +12,6 @@ class ReactRoles(commands.Cog):
     @app_commands.command(name="pingroles")
     @commands.has_permissions(administrator=True)
     async def pingroles(self, interaction:discord.Interaction):
-        await interaction.channel.purge(limit=1)
         view = PingRolesView(self.bot)
         embed = discord.Embed(
             title=" ",
@@ -24,7 +23,6 @@ class ReactRoles(commands.Cog):
     @app_commands.command(name="genderroles")
     @commands.has_permissions(administrator=True)
     async def genderroles(self, interaction:discord.Interaction):
-        await interaction.channel.purge(limit=1)
         view = GenderRolesView(self.bot)
         embed = discord.Embed(
             title=" ",

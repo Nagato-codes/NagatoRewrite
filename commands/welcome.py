@@ -10,9 +10,19 @@ class Welcome(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member:discord.Member):
+
         memrole = discord.utils.get(member.guild.roles, name="Members")
+        levelrole = discord.utils.get(member.guild.roles, name="-----level roles-----")
+        specialroles = discord.utils.get(member.guild.roles, name="-----Special Roles-----")
+        genderroles = discord.utils.get(member.guild.roles, name="-----Gender Roles-----")
+        pingroles = discord.utils.get(member.guild.roles, name="-----Ping Roles-----")
+
         await member.add_roles(memrole)
-        
+        await member.add_roles(levelrole)
+        await member.add_roles(specialroles)
+        await member.add_roles(genderroles)
+        await member.add_roles(pingroles)
+
         channel = self.bot.get_channel(1117161505624957101)
 
         background = Editor("assets/imgs/welcomebg.jpg")

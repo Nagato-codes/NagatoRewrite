@@ -89,6 +89,7 @@ class Moderation(commands.Cog):
                 description=f"User: `{str(member)}` has been warned\nReason: `{reason}`\nModerator:{interaction.user.mention}",
                 color=discord.Color.random()
             )
+            log_channel = discord.utils.get(interaction.guild.channels, name="🔰・logs")
             await log_channel.send(embed=embed)
             await member.send(
                 embed=discord.Embed(
@@ -96,7 +97,6 @@ class Moderation(commands.Cog):
                     color=discord.Color.red()
                 )
             )
-            log_channel = discord.utils.get(interaction.guild.channels, name="🔰・logs")
         except:
             pass
 
@@ -311,7 +311,7 @@ class Moderation(commands.Cog):
         if amount == 1:
             await interaction.response.send_message("Its 1 message im not gonna delee it do it on your own")
             return
-        deleted = await interaction.channel.purge(limit=amount + 1)
+        deleted = await interaction.channel.purge(limit=amount)
         embed = discord.Embed(
             title=f"{len(deleted)} messages were deleted",
             description=" ",
@@ -319,7 +319,7 @@ class Moderation(commands.Cog):
         )
         embed.add_field(name="Channel", value=interaction.channel.mention, inline=True)
         embed.set_footer(icon_url=interaction.user.avatar, text=f"Purged by {BULLET} {interaction.user.display_name}")
-        await interaction.response.send_message(embed=embed)
+        await interaction.response.send_message(embed=embed, ephemeral=True)
 
     @app_commands.command(name="lock", description="Lock a channel")
     @commands.has_permissions(manage_channels=True)

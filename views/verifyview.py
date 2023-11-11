@@ -1,6 +1,7 @@
 import discord
 import random
 import asyncio
+import os
 from PIL import Image, ImageDraw, ImageFont
 from discord.ext import commands
 from discord.ui import View, button
@@ -27,6 +28,8 @@ async def send_verification_code(user):
     image.save(image_path)
 
     await user.send("Verification Code: ", file=discord.File(image_path))
+
+    os.remove(image_path)
 
 class VerifyView(View):
     def __init__(self, bot: commands.Bot):
@@ -65,6 +68,8 @@ class VerifyView(View):
                 if role:
                     await interaction.user.add_roles(role)
                     await interaction.user.send(f"You are now verified in {interaction.guild}")
+                    channel = discord.utils.get(interaction.guild.channels, name="💬・general")
+                    await channel.send(f"Welcome {interaction.user.mention}")
                 else:
                     await interaction.response.send_message("Sorry, this command is only for Nagato's main server.", ephemeral=True)
             else:

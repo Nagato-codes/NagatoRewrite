@@ -14,10 +14,11 @@ class Verify(commands.Cog):
         if interaction.guild.id == 1116339771145465926:
             view = VerifyView(self.bot)
             await interaction.channel.purge(limit=1)
+            channel = discord.utils.get(interaction.guild.channels, name="🗞-reaction-roles")
             await interaction.response.send_message(
                 embed=discord.Embed(
                     title="Verify Yourself!!",
-                    description="Verify Yourself in this server by clicking the button and writing the ***right*** code in the bots dm",
+                    description=f"Verify Yourself in this server by clicking the button and writing the ***right*** code in the bots dm\nand please for the love of god get your reaction roles in {channel.mention}",
                     color=discord.Color.random()
                 ),
                 view=view

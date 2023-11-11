@@ -80,7 +80,7 @@ class Afk(commands.Cog):
         for mention in message.mentions:
             db : aiosqlite.Connection = await aiosqlite.connect("Database/afk.db")
             cursor = await db.execute("SELECT memres, afktime FROM afk WHERE memid = ?",
-                (mention.id)
+                (mention.id,)
             )
             await db.close()
             result = await cursor.fetchone()

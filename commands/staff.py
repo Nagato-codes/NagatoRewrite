@@ -43,7 +43,7 @@ async def update_staff_list_embed(guild):
         await db.commit()
 
     # Update the staff list embed
-    channel = discord.utils.get(guild.text_channels, name="📕・role-info")
+    channel = discord.utils.get(guild.text_channels, name="📕・staff-info")
     if channel:
         embed = discord.Embed(
             title="Staff List",
