@@ -172,7 +172,7 @@ class Giveaway(commands.Cog):
         prize = res[2]
         host = gmsg.guild.get_member(int(res[0]))
         no_of_winner = int(res[1])
-        winners = await list(gmsg.reactions[0].users())
+        winners = [user async for user in gmsg.reactions[0].users()]
         winners.pop(winners.index(self.bot.user))
         winni = []
         for w in winners:

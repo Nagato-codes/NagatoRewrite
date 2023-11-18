@@ -9,6 +9,7 @@ async def update_staff_list_embed(guild):
     # Fetch the staff roles from your guild (server)
     staff_roles = [
         "Nagato", 
+        "Konan",
         "Official Projects", 
         "Deva Path",
         "Animal Path",

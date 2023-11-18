@@ -36,7 +36,7 @@ class Levelsys(commands.Cog):
           lvl = data[str(message.author.id)]['level']
 
           #increase the xp by the number which has 100 as its multiple
-          increased_xp = xp+25
+          increased_xp = xp+10
           new_level = int(increased_xp/100)
 
           data[str(message.author.id)]['xp']=increased_xp

@@ -320,6 +320,21 @@ class HelpSelect(Select):
                 value="Report a user in the server",
                 inline=True
             )
+            FU_embed.add_field(
+                name="``/converttosec``",
+                value="this command is useful when your trying to mute someone and need to convert minutes to seconds",
+                inline=True
+            )
+            FU_embed.add_field(
+                name="``/hug``",
+                value="HUG A USER",
+                inline=True
+            )
+            FU_embed.add_field(
+                name="``/kiss``",
+                value="kiss a user",
+                inline=True
+            )
             await interaction.response.send_message(embed=FU_embed, ephemeral=True)
         elif selected_option == "Economy Commands":
             E_embed = discord.Embed(

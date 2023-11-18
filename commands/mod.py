@@ -232,16 +232,17 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="unban", description="Unban a user from the server")
     @commands.has_permissions(ban_members=True)
-    async def unban(self, interaction: discord.Interaction, member:discord.Member, *, reason: str = "No reason provided"):
+    async def unban(self, interaction: discord.Interaction, user: discord.User, *, reason: str = "No reason provided"):
         try:
-            await member.unban(reason=reason)
+            guild = interaction.guild
+            await guild.unban(user=user)
             embed = discord.Embed(
                 title="User Unbanned!",
                 description=" ",
                 color=discord.Color.random()
             )
-            embed.add_field(name="User ID", value=member.id, inline=True)
-            embed.add_field(name="UserName", value=member.name, inline=True)
+            embed.add_field(name="User ID", value=user.id, inline=True)
+            embed.add_field(name="UserName", value=user.name, inline=True)
             embed.set_footer(icon_url=interaction.user.avatar, text=f"Unbanned By • {interaction.user.display_name}")
             await interaction.response.send_message(embed=embed)
             log_channel = discord.utils.get(interaction.guild.channels, name="🔰・logs")
@@ -250,8 +251,8 @@ class Moderation(commands.Cog):
                 description=" ",
                 color=discord.Color.random()
             )
-            log_embed.add_field(name="User ID", value=member.id, inline=True)
-            log_embed.add_field(name="UserName", value=member.name, inline=True)
+            log_embed.add_field(name="User ID", value=user.id, inline=True)
+            log_embed.add_field(name="UserName", value=user.name, inline=True)
             log_embed.set_footer(icon_url=interaction.user.avatar, text=f"Unbanned By • {interaction.user.display_name}")
             await log_channel.send(embed=log_embed)
             try:
@@ -259,7 +260,7 @@ class Moderation(commands.Cog):
                     title=f"YOU HAVE BEEN UNBANNED FROM {interaction.guild.name}",
                     description=f"Reason: {reason}"
                 )
-                await member.send(embed=Membed)
+                await user.send(embed=Membed)
             except discord.Forbidden:
                 pass
         except Exception as e:
