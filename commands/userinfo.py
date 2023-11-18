@@ -8,8 +8,8 @@ class UserInfo(commands.Cog):
         super().__init__()
         self.bot = bot
 
-    @app_commands.command()
-    async def userinfo(self, interaction:discord.Interaction, user: discord.Member = None):
+    @app_commands.command(name="userinfo", description="displays information about a user")
+    async def userinfo(self, interaction:discord.Interaction, user:  discord.User = None):
         user = user or interaction.user
         roles = [role.mention for role in user.roles if role != interaction.guild.default_role]
         

@@ -69,7 +69,7 @@ class Levelsys(commands.Cog):
             json.dump(data, f)
 
   @app_commands.command(name="rank", description="Shows Your or any users Rank")
-  async def rank(self, interaction: discord.Interaction, user: discord.Member = None):
+  async def rank(self, interaction: discord.Interaction, user: discord.User = None):
     user = user or interaction.user
 
     with open("utils/levels.json", "r") as f:
@@ -169,7 +169,7 @@ class Levelsys(commands.Cog):
 
   @app_commands.command(name="rank_reset", description="reset a users rank")
   @commands.has_permissions(administrator=True)
-  async def rank_reset(self, interaction: discord.Interaction, user: discord.Member):
+  async def rank_reset(self, interaction: discord.Interaction, user:  discord.User):
     member = user or interaction.user
     
     with open("utils/levels.json", "r") as f:
@@ -184,7 +184,7 @@ class Levelsys(commands.Cog):
   
   @app_commands.command(name="increase_level", description="Increase a users level")
   @commands.has_permissions(administrator=True)
-  async def increase_level(self, interaction: discord.Interaction, increase_by: int, user: discord.Member):
+  async def increase_level(self, interaction: discord.Interaction, increase_by: int, user: discord.User):
     member = user or interaction.user
 
     with open("utils/levels.json", "r") as f:
@@ -199,7 +199,7 @@ class Levelsys(commands.Cog):
 
   @app_commands.command(name="increase_xp", description="Increase a users xp rate")
   @commands.has_permissions(administrator=True)
-  async def increase_xp(self, interaction: discord.Interaction, increase_by: int, user: discord.Member):
+  async def increase_xp(self, interaction: discord.Interaction, increase_by: int, user: discord.User):
     member = user or interaction.user
 
     with open("utils/levels.json", "r") as f:

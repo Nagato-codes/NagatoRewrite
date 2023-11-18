@@ -10,7 +10,7 @@ class LoveCalc(commands.Cog):
         self.bot = bot
 
     @app_commands.command(name="lovecalc", description="Calculate yours and a persons love")
-    async def lovecalc(self, interaction: discord.Interaction, member1:discord.Member, member2: discord.Member):
+    async def lovecalc(self, interaction: discord.Interaction, member1: discord.User, member2:  discord.User):
         love_percent = random.randint(0, 100)
         if love_percent < 50:
             embed = discord.Embed(

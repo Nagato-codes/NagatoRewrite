@@ -38,7 +38,7 @@ class Joke(commands.Cog):
                 await interaction.response.send_message("Failed to fetch a joke.")
         except Exception as e:
             print(e)
-            await interaction.response.send_message("An error occurred while fetching the joke.")
+            await interaction.response.send_message("An error occurred while fetching the joke")
 
 async def setup(bot:commands.Bot):
     await bot.add_cog(Joke(bot), guilds=[discord.Object(id=SERVERID)])

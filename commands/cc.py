@@ -78,7 +78,7 @@ class CustomCommands(commands.Cog):
             if result:
                 await message.channel.send(result[0])
 
-    @app_commands.command()
+    @app_commands.command(name="listcc", description="list all custom commands")
     async def listcc(self, interaction:discord.Interaction):
         """
         List all available custom commands.

@@ -8,6 +8,7 @@ from time import time
 from discord import app_commands
 from utils.nagato  import SERVERID
 from views.banapp import BanAppealView
+from discord.ui import View
 
 async def get_wid():
     db = await aiosqlite.connect("Database/warns.db")
@@ -62,7 +63,7 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="warn", description="Warn a member")
     @commands.has_permissions(manage_messages=True)
-    async def warn(self, interaction: discord.Interaction, member: discord.Member, *, reason: str):
+    async def warn(self, interaction: discord.Interaction, member:  discord.User, *, reason: str):
         wid = await get_wid()
         db = await aiosqlite.connect("Database/warns.db")
         await db.execute(
@@ -102,7 +103,7 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="warnings", description="Check a users warnings")
     @commands.has_permissions(manage_messages=True)
-    async def warnings(self, interaction: discord.Interaction, member: discord.Member):
+    async def warnings(self, interaction: discord.Interaction, member:  discord.User):
         db = await aiosqlite.connect("Database/warns.db")
         cur = await db.execute("SELECT * FROM warn WHERE memid=? ORDER BY time DESC", (member.id,))
         res = await cur.fetchall()
@@ -123,7 +124,7 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="clearwarns", description="Clear all warnings of a user")
     @commands.has_permissions(manage_channels=True)
-    async def clearwarn(self, interaction: discord.Interaction, member: discord.Member):
+    async def clearwarn(self, interaction: discord.Interaction, member:  discord.User):
         db = await aiosqlite.connect("Database/warns.db")
         try:
             await db.execute("DELETE FROM warn WHERE memid=?", (member.id,))
@@ -161,7 +162,7 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="ban", description="Ban a user from the server")
     @commands.has_permissions(ban_members=True)
-    async def ban(self, interaction:discord.Interaction, member:discord.Member, *, reason: str = "No reason provided"):
+    async def ban(self, interaction:discord.Interaction, member: discord.User, *, reason: str = "No reason provided"):
         try:
             await member.ban(reason=reason)
             embed = discord.Embed(
@@ -183,7 +184,8 @@ class Moderation(commands.Cog):
             log_embed.add_field(name="UserName", value=member.name, inline=True)
             log_embed.set_footer(icon_url=interaction.user.avatar, text=f"Banned By • {interaction.user.mention}")
             await log_channel.send(embed=log_embed)
-            view = BanAppealView(self.bot)
+            view = View(timeout=None)
+            view.add_item(BanAppealView())
             try:
                 Membed = discord.Embed(
                     title=f"YOU HAVE BEEN BANNED FROM {interaction.guild.name}",
@@ -197,7 +199,7 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="kick", description="Kick a member from the server")
     @commands.has_permissions(kick_members=True)
-    async def kick(self, interaction:discord.Interaction, member:discord.Member, *, reason: str = "No reason provided"):
+    async def kick(self, interaction:discord.Interaction, member: discord.User, *, reason: str = "No reason provided"):
         try:
             await member.kick(reason=reason)
             embed = discord.Embed(
@@ -268,7 +270,7 @@ class Moderation(commands.Cog):
 
     @app_commands.command(name="mute", description="Mute a user in the server")
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, interaction: discord.Interaction, member: discord.Member, time: int, reason: str = None):
+    async def mute(self, interaction: discord.Interaction, member:  discord.User, time: int, reason: str = None):
         role = discord.utils.get(interaction.guild.roles, name="Muted")
         await member.add_roles(role)
         embed = discord.Embed(

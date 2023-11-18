@@ -10,7 +10,7 @@ class Log(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_member_join(self, member:discord.Member):
+    async def on_member_join(self, member: discord.User):
         if member.bot:
             return
         embed = discord.Embed(
@@ -25,7 +25,7 @@ class Log(commands.Cog):
         await channel.send(embed=embed)
     
     @commands.Cog.listener()
-    async def on_member_remove(self, member:discord.Member):
+    async def on_member_remove(self, member: discord.User):
         if member.bot:
             return
         embed = discord.Embed(
@@ -40,7 +40,7 @@ class Log(commands.Cog):
         await channel.send(embed=embed)
 
     @commands.Cog.listener()
-    async def on_member_update(self, before, after: discord.Member):
+    async def on_member_update(self, before, after:  discord.User):
         if before.bot:
             return
         if before.nick != after.nick:

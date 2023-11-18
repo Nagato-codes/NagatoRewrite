@@ -7,7 +7,7 @@ from discord.ext import commands
 from utils.nagato import GTOKEN
 from discord.ui import View, Button, button
 
-async def get_transcript(member: discord.Member, channel: discord.TextChannel):
+async def get_transcript(member:  discord.User, channel: discord.TextChannel):
     export = await chat_exporter.export(channel=channel)
     file_name = f"{member.id}.html"
     with open(file_name, "w", encoding="utf-8") as f:

@@ -10,7 +10,7 @@ class Spotifyy(commands.Cog):
         self.bot = bot
 
     @app_commands.command(name="spotify", description="Look at what you or some one is listening to")
-    async def sp(self, interaction: discord.Interaction, member: discord.Member = None):
+    async def sp(self, interaction: discord.Interaction, member:  discord.User = None):
         member = member or interaction.user
         client = Spotify(bot=self.bot, member=member)
         content , image, view = await client.get()

@@ -1,27 +1,11 @@
-import discord
-from discord.ext import commands
-from discord.ui import button, View
+from discord import ButtonStyle
+from discord.ui import Button
 
-class BanAppealView(View):
-    def __init__(self, bot:commands.Bot):
-        super().__init__()
-        self.bot = bot
-
-    @button(
-        label="Ban Appeal",
-        style=discord.ButtonStyle.blurple,
-        emoji=":link:"
-    )
-    async def ban_appeal(
-        self, 
-        interaction:discord.Interaction,
-        button:discord.Button
-    ):
-        link = "https://nagato.vercel.app/bp.html"
-        await interaction.response.send_message(
-            embed=discord.Embed(
-                title="",
-                description=f"Click this [link] to ban appeal({link})",
-                color=discord.Color.random()
-            )
+class BanAppealView(Button):
+    def __init__(self):
+        super().__init__(
+            style=ButtonStyle.url,
+            label="Ban Appeal",
+            emoji="🔗",
+            url="https://nagato.vercel.app/bp.html"
         )

@@ -9,7 +9,7 @@ class Welcome(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_member_join(self, member:discord.Member):
+    async def on_member_join(self, member: discord.User):
 
         memrole = discord.utils.get(member.guild.roles, name="Members")
         levelrole = discord.utils.get(member.guild.roles, name="-----level roles-----")

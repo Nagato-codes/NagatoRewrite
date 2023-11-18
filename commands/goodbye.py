@@ -7,7 +7,7 @@ class Leave(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_member_remove(self, member:discord.Member):
+    async def on_member_remove(self, member: discord.User):
         channel = discord.utils.get(member.guild.channels, name="👋・goodbye")
         embed = discord.Embed(
             title=f"Member Left!",

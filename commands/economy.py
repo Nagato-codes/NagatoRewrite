@@ -282,7 +282,7 @@ class Economy(commands.Cog):
             await interaction.response.send_message(random.choice(cooldown_messages))
 
     @app_commands.command(name="balance", description="Check yours or a user's balance")
-    async def bankbal(self, interaction: discord.Interaction, user: discord.Member = None):
+    async def bankbal(self, interaction: discord.Interaction, user: discord.User = None):
         if user is None:
             user = interaction.user
 

@@ -9,7 +9,7 @@ class Avatar(commands.Cog):
         self.bot = bot
 
     @app_commands.command(name="avatar", description="Check you or a users avatar")
-    async def avatar(self, interaction:discord.Interaction, user: discord.Member = None):
+    async def avatar(self, interaction:discord.Interaction, user: discord.User = None):
         user = user or interaction.user
         embed = discord.Embed(
             title=" ",
