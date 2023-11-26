@@ -319,12 +319,7 @@ class HelpSelect(Select):
                 name="``/report``",
                 value="Report a user in the server",
                 inline=True
-            )
-            FU_embed.add_field(
-                name="``/converttosec``",
-                value="this command is useful when your trying to mute someone and need to convert minutes to seconds",
-                inline=True
-            )
+            ) 
             FU_embed.add_field(
                 name="``/hug``",
                 value="HUG A USER",
