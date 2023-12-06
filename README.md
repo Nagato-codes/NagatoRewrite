@@ -13,7 +13,7 @@
 <!-- Table of Contents -->
 ## Table of Contents
 - [Features](#features)
-- [Helpers](#helpers)
+- [Workers](#workers)
 - [Prerequisites](#prerequisites)
 - [License](LICENSE)
 - [Contact](#contact)
@@ -29,10 +29,9 @@
 - Python 3.8 or higher
 - Discord Bot Token
 
-### Helpers
+### Workers
 - Nagato (Owner / Creator / Coder)
 - Cope (Server Manager / Designer / Assistant Coder) 😔 R. I. P
-- ShamelessPlayer (Designer/ Assistant Coder)
 
 ### Contact
 - [Server Link](https://discord.gg/sGnASjneTh)
