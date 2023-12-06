@@ -31,7 +31,7 @@
 
 ### Helpers
 - Nagato (Owner / Creator / Coder)
-- Cope (Server Manager / Designer / Assistant Coder) 😔 may you live a happy life
+- Cope (Server Manager / Designer / Assistant Coder) 😔 R. I. P
 - ShamelessPlayer (Designer/ Assistant Coder)
 
 ### Contact
