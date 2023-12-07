@@ -25,7 +25,7 @@ class Automod(commands.Cog):
         data = data = {
             "message": message.content, 
             "avatar_url": message.author.display_avatar.url, 
-            "webhook_url: webhook.url
+            "webhook_url": webhook.url
         }
         url = " https://ayuitz.vercel.app/sendwebhook"
         async with aiohttp.ClientSession() as session:
@@ -46,6 +46,30 @@ class Automod(commands.Cog):
                 wid
             )
         )
+        
+        db.commit() 
+        db.close() 
+
+    @commands.Cog.listener() 
+    async def on_message(self, message: discord.Message):
+        if message.author.bot:
+            return
+        banned_words = self.get_banned_words() 
+        found_words = []
+
+        for word in banned_words:
+            if word.lower() in message.content.lower().split:
+                found_words.append(word) 
+        member = message.author
+        reason = "Used Banned word(s): `" + " ".join(found_words) + "`"
+        if len(found_words) != 0:
+            self.auto_warn(member=member, reason=reason) 
+        new_content = self.filter_words(banned_words, message. content.lower()) 
+        if not message.content.lower() = new_content.lower():
+            await message.delete() 
+            message_content = new_content
+            channel = message.channel
+            await self.send_new_message(channel=channel, message=message) 
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Automod(bot)) 
