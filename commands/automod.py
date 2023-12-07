@@ -2,6 +2,7 @@ import time
 import sqlite3
 import discord
 import aiohttp
+from commands.mod import get_wid
 from discord.ext import commands
 
 class Automod(commands.Cog):
@@ -32,6 +33,19 @@ class Automod(commands.Cog):
         if not response.status == 200:
             await channel.send(embed=discord.Embed(description=message.content).set_author(name=message.author.display_name, icon_url=message.author.display_avatar.url)) 
 
-    
+    def auto_warn(self, member: discord.Member, * reason: str):
+        wid = await get_wid()
+        db = await sqlite3.connect("Database/warns.db")
+        await db.execute(
+            "INSERT INTO warn VALUES(?,?,?,?,?)",
+            (
+                member.id,
+                reason,
+                interaction.user.id,
+                int(time()),
+                wid
+            )
+        )
+
 async def setup(bot: commands.Bot):
     await bot.add_cog(Automod(bot)) 
